@@ -8,6 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
   <div class="container">
@@ -16,191 +17,31 @@
       <p>Animal Rescue Statistics in Victoria</p>
     </header>
 
-    <!-- Section for the first two charts (side by side) -->
     <section id="charts-section">
       <div class="chart-wrapper">
         <h2>Cost Comparison Between Adoption and Purchasing</h2>
-        <p>This diverging bar chart compares the costs of adopting a dog versus purchasing one in Australia, with bars diverging from the center.</p>
-        <div id="chart1"></div>
+        <p>This diverging bar chart compares the costs of adopting a dog versus purchasing one in Australia.</p>
+        <div id="chart1" class="chart-box"></div>
       </div>
 
       <div class="chart-wrapper">
         <h2>Euthanasia Rates Over Time</h2>
         <p>This line graph shows the change in euthanasia rates from 1999 to 2023.</p>
-        <div id="chart2"></div>
+        <div id="chart2" class="chart-box"></div>
       </div>
     </section>
 
-    <!-- Section for the full-width map -->
     <section id="map-section">
       <div class="map-wrapper">
         <h2>Total Animals Rescued by Municipality</h2>
         <p>This map shows the total number of animals rescued in each municipality in Victoria, with the size of the bubbles representing the number of rescued animals.</p>
-        <div id="chart3"></div>
+        <div id="chart3" class="chart-box"></div>
       </div>
     </section>
 
-    <!-- Footer -->
     <footer>
       <p>© 2024 Rosie Williams | FIT3179 - Assignment 2</p>
     </footer>
   </div>
-
-  <script>
-  // Chart 1: Diverging Bar Chart (Adoption vs Purchasing)
-  const spec1 = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Diverging bar chart comparing adoption and purchasing costs.",
-    "data": {
-      "url": "Dog_Ownership_Costs.csv",  // Reference external CSV file
-      "format": {"type": "csv"}
-    },
-    "transform": [
-      {"calculate": "-datum.Adoption", "as": "NegativeAdoption"}  // Make adoption values negative
-    ],
-    "layer": [
-      {
-        "mark": "bar",
-        "encoding": {
-          "y": {"field": "Cost Item", "type": "nominal", "title": "Cost Item", "axis": {"labelAngle": 0}},
-          "x": {
-            "field": "NegativeAdoption",
-            "type": "quantitative",
-            "scale": {"domain": [-1200, 7000]},  // Limit domain to -1000 to 1000
-            "axis": {"title": "Cost (AUD)"}
-          },
-          "color": {"value": "#4CAF50"}  // Green for Adoption
-        }
-      },
-      {
-        "mark": "bar",
-        "encoding": {
-          "y": {"field": "Cost Item", "type": "nominal"},
-          "x": {
-            "field": "Purchasing",
-            "type": "quantitative",
-            "scale": {"domain": [-1200, 7000]},  // Limit domain to -1000 to 1000
-            "axis": {"title": null}
-          },
-          "color": {"value": "#FF9800"}  // Orange for Purchasing
-        }
-      }
-    ],
-    "width": 400,  // Adjust width so it fits within its section
-    "height": 400
-  };
-  vegaEmbed('#chart1', spec1, { actions: false });
-
-  // Chart 2: Euthanasia Rates Over Time (Dual Y-Axes with Independent Scales)
-  const spec2 = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Euthanasia rates over time with dual axes for count and percentage.",
-    "data": {
-      "url": "Euthanasia_Rates.csv",  // Reference external CSV file
-      "format": {"type": "csv"}
-    },
-    "encoding": {
-      "x": {
-        "field": "Year",  // Reference Year correctly
-        "type": "ordinal",
-        "axis": {"title": "Year"}
-      }
-    },
-    "layer": [
-      // Line for Euthanasia Count (Left Axis)
-      {
-        "mark": "line",
-        "encoding": {
-          "y": {
-            "field": "Euthanasia",
-            "type": "quantitative",
-            "title": "Euthanasia Count",
-            "axis": {
-              "titleColor": "red",  // Color the axis title red for clarity
-              "grid": false  // Remove gridlines for the count axis
-            },
-            "scale": {"domain": [0, 30000]}  // Set an appropriate domain for euthanasia count
-          },
-          "color": {"value": "red"}  // Red line for Euthanasia count
-        }
-      },
-      // Line for Euthanasia Percentage (Right Axis)
-      {
-        "mark": "line",
-        "encoding": {
-          "y": {
-            "field": "Percentage",
-            "type": "quantitative",
-            "title": "Euthanasia Percentage (%)",
-            "axis": {
-              "orient": "right",  // Right-side axis for percentage
-              "titleColor": "blue"
-            },
-            "scale": {"domain": [0, 50]}  // Set an appropriate domain for percentage
-          },
-          "color": {"value": "blue"}  // Blue line for Percentage
-        }
-      }
-    ],
-    "resolve": {
-      "scale": {"y": "independent"}  // Ensure independent y-axes for both layers
-    },
-    "width": 450,
-    "height": 400
-  };
-  vegaEmbed('#chart2', spec2, { actions: false });
-
-  // Chart 3: Proportional Symbol Map (with better visibility for dots)
-  const spec3 = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Proportional symbol map for total animals rescued by municipality.",
-    "data": {
-      "url": "Graph_Data.csv",  // Reference the entire CSV file
-      "format": {"type": "csv"}  // Explicitly state it's a CSV file
-    },
-    "projection": {"type": "mercator"},  // Use a Mercator projection for Australia
-    "layer": [
-      {
-        "data": {
-          "url": "vic_localities.json",  // Local file from root directory (TopoJSON)
-          "format": {"type": "topojson", "feature": "vic_localities"}  // Correct feature name based on your TopoJSON
-        },
-        "mark": {"type": "geoshape", "fill": "#e0e0e0", "stroke": "#ffffff"}  // Lighter map background and white stroke
-      },
-      {
-        "mark": {
-          "type": "circle",
-          "opacity": 0.8,  // Set opacity for better visibility
-          "stroke": "black",  // Add a black border to contrast the dots
-          "strokeWidth": 1.5
-        },
-        "encoding": {
-          "longitude": {"field": "Longitude", "type": "quantitative"},
-          "latitude": {"field": "Latitude", "type": "quantitative"},
-          "size": {
-            "field": "Total Animals",  // Bubble size based on total animals rescued
-            "type": "quantitative",
-            "scale": {"range": [100, 2000]},  // Increase range for better visibility
-            "legend": {"title": "Total Animals Rescued"}
-          },
-          "color": {
-            "field": "Total Animals",  // Color dots based on the number of rescued animals
-            "type": "quantitative",
-            "scale": {"scheme": "blues"},  // Use a blue color scale
-            "legend": {"title": "Total Animals"}
-          },
-          "tooltip": [
-            {"field": "Local Government Municipality", "type": "nominal", "title": "Municipality"},
-            {"field": "Total Animals", "type": "quantitative", "title": "Total Rescued Animals"}
-          ]
-        }
-      }
-    ],
-    "width": 800,
-    "height": 600
-  };
-  vegaEmbed('#chart3', spec3, { actions: false });
-
-  </script>
 </body>
 </html>

@@ -1,22 +1,32 @@
 /* styles.css */
+
+/* Define global color variables */
+:root {
+  --color-light-purple: #DDC4DD;
+  --color-soft-pink: #DCCFEC;
+  --color-muted-purple: #A997DF;
+  --color-deep-blue: #4F617D;
+  --color-dark-blue: #1A3A3A;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--color-light-purple);
+  color: var(--color-dark-blue);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--color-soft-pink);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 header {
-  background-color: #2a2a2a;
+  background-color: var(--color-dark-blue);
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -35,36 +45,43 @@ header p {
 
 h2 {
   font-size: 1.8rem;
-  color: #333;
+  color: var(--color-deep-blue);
   margin-bottom: 10px;
   text-align: center;
 }
 
 p {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-deep-blue);
   margin-bottom: 20px;
   text-align: center;
 }
 
-/* Section for Charts (side by side) */
+/* Section for Charts */
 #charts-section {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
+  gap: 20px; /* Reduce gap between charts */
   margin-bottom: 40px;
-  flex-wrap: wrap; /* Allow charts to stack vertically on smaller screens */
+  flex-wrap: nowrap;
 }
 
 .chart-wrapper {
-  width: 48%; /* Each chart takes up 48% on large screens */
+  width: 48%; /* Increase chart size */
   text-align: center;
+  background-color: var(--color-muted-purple);
+  padding: 10px; /* Reduce padding inside the chart wrapper */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 #chart1, #chart2 {
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  width: 100%; /* Use full width of wrapper */
   height: auto;
-  aspect-ratio: 16/9;
+  margin: 0 auto;
 }
 
 /* Section for the full-width map */
@@ -77,45 +94,45 @@ p {
 .map-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  background-color: var(--color-muted-purple);
+  padding: 10px; /* Reduce padding inside the map wrapper */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 #chart3 {
-  width: 100%;
-  max-width: 1200px;
+  display: block;
+  max-width: 100%;
+  width: 100%; /* Use full width of the map wrapper */
   height: auto;
-  aspect-ratio: 16/9;
   margin: 0 auto;
 }
 
 /* Responsive adjustments with media queries */
 @media (max-width: 900px) {
-  /* Make the charts smaller when screen width is below 900px */
   .chart-wrapper {
     width: 100%; /* Full width when screen is below 900px */
   }
-  
+
   #chart1, #chart2 {
-    aspect-ratio: 16/9; /* Maintain aspect ratio */
-    width: 100%; /* Full width */
+    width: 100%;
   }
-  
+
   #chart3 {
     width: 100%;
   }
 }
 
 @media (max-width: 600px) {
-  /* Make charts even smaller when screen width is below 600px */
   .chart-wrapper {
     width: 100%; /* Full width in a single column */
   }
 
   #chart1, #chart2 {
-    aspect-ratio: 16/9;
-    width: 100%; /* Stack vertically at 100% width */
+    width: 100%;
   }
-  
+
   #chart3 {
     width: 100%;
   }

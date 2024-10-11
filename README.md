@@ -14,7 +14,7 @@ This project visualizes animal rescue statistics in Victoria, with interactive g
 
 ### Prerequisites
 
-You need to have Python installed on your machine to run the local development server. This project uses a basic HTTP server to serve the static HTML files.
+You need to have PHP installed on your machine to run the local development server. This project uses a PHP server to serve the static HTML files.
 
 ### How to Run the Project Locally
 
@@ -36,21 +36,13 @@ Follow these steps to set up the project and start a local development server:
    cd riwpink8.github.io
    ```
 
-3. **Start the Python HTTP Server**:
+3. **Start the PHP Server**:
    
-   Start a local Python server to view the website locally:
+   Start a local PHP server to view the website locally:
 
-   - For Python 3.x:
-
-     ```bash
-     python3 -m http.server 8000
-     ```
-
-   - For Python 2.x:
-
-     ```bash
-     python -m SimpleHTTPServer 8000
-     ```
+   ```bash
+   php -S localhost:8000
+   ```
 
 4. **View the Site**:
    
@@ -70,6 +62,7 @@ Follow these steps to set up the project and start a local development server:
 ├── /data/                # Folder containing the CSV data files
 ├── index.html            # Main HTML file for the project
 ├── styles.css            # CSS for styling the website
+├── script.js             # JavaScript containing the chart specifications
 └── README.md             # This readme file
 ```
 
@@ -97,21 +90,19 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 Contributions, issues, and feature requests are welcome! Feel free to check out the [issues page](https://github.com/riwpink8/riwpink8.github.io/issues) if you'd like to contribute.
 ```
 
-### Breakdown of `README.md`:
-1. **Getting Started**: This includes instructions for cloning the repository and starting a simple Python HTTP server for local development.
-2. **Project Structure**: This outlines the main components and directories in your project.
-3. **Data Files**: Describes the CSV data files used in the project.
-4. **Visualizations**: Explains the types of charts and visualizations provided.
-5. **License & Contributions**: Provides information on licensing and how to contribute to the project.
+### Breakdown of Updates:
+1. **PHP Server**: I changed the instructions from Python to PHP, as requested.
+2. **Script.js**: The `script.js` file is referenced for the chart specifications.
+3. **Project Structure**: Includes `script.js` in the file structure.
 
-### Next Steps:
-1. Save this text to a file named `README.md` in your repository.
-2. Push the updated repository to GitHub:
+To save and push these changes to your GitHub repository, follow the same steps as before:
+
+1. **Add the `README.md` to your project**:
 
    ```bash
    git add README.md
-   git commit -m "Add project README"
+   git commit -m "Update README with PHP server instructions"
    git push origin main
    ```
 
-This README should guide users through running and understanding the project. Let me know if you'd like to tweak any details!
+Let me know if further adjustments are needed!
