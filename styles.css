@@ -2,11 +2,11 @@
 
 /* Define global color variables */
 :root {
-  --color-light-purple: #DDC4DD;
-  --color-soft-pink: #DCCFEC;
-  --color-muted-purple: #A997DF;
-  --color-deep-blue: #4F617D;
-  --color-dark-blue: #1A3A3A;
+  --color-light-purple: #CFCCD6;
+  --color-soft-pink: #BBC2E2;
+  --color-muted-purple: #B7B5E4;
+  --color-deep-blue: #847979;
+  --color-dark-blue: #322E18;
 }
 
 body {
@@ -31,6 +31,7 @@ header {
   padding: 20px;
   text-align: center;
   margin-bottom: 40px;
+  border-radius: 8px;
 }
 
 header h1 {
@@ -64,22 +65,24 @@ p {
   gap: 20px; /* Reduce gap between charts */
   margin-bottom: 40px;
   flex-wrap: nowrap;
+  transition: all 0.5s ease; /* Smooth transition for layout change */
 }
 
 .chart-wrapper {
-  width: 48%; /* Increase chart size */
+  width: 48%; /* Set initial width for charts side by side */
   text-align: center;
   background-color: var(--color-muted-purple);
-  padding: 10px; /* Reduce padding inside the chart wrapper */
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: width 0.5s ease, transform 0.5s ease; /* Smooth width and position transitions */
 }
 
 #chart1, #chart2 {
   display: block;
   max-width: 100%;
-  width: 100%; /* Use full width of wrapper */
+  width: 100%;
   height: auto;
   margin: 0 auto;
 }
@@ -95,7 +98,7 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   background-color: var(--color-muted-purple);
-  padding: 10px; /* Reduce padding inside the map wrapper */
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -104,15 +107,22 @@ p {
 #chart3 {
   display: block;
   max-width: 100%;
-  width: 100%; /* Use full width of the map wrapper */
+  width: 100%;
   height: auto;
   margin: 0 auto;
 }
 
 /* Responsive adjustments with media queries */
-@media (max-width: 900px) {
+/* Increase breakpoint to make the stacked layout happen earlier */
+@media (max-width: 1100px) {  /* Changed from 900px to 1100px */
+  #charts-section {
+    flex-direction: column; /* Stack charts vertically on smaller screens */
+    align-items: center;
+  }
+
   .chart-wrapper {
-    width: 100%; /* Full width when screen is below 900px */
+    width: 100%; /* Full width when screen is below 1100px */
+    transform: translateY(0); /* Animate smooth stacking */
   }
 
   #chart1, #chart2 {
@@ -127,6 +137,7 @@ p {
 @media (max-width: 600px) {
   .chart-wrapper {
     width: 100%; /* Full width in a single column */
+    transform: translateY(0); /* Reset translate in smaller screens */
   }
 
   #chart1, #chart2 {

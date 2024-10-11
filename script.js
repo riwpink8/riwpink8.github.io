@@ -23,8 +23,8 @@ const spec1 = {
       }
     ],
     "autosize": { "type": "fit", "contains": "padding" },
-    "width": 480,  // Set fixed width
-    "height": 350  // Set fixed height
+    "width": 500,  // Set fixed width
+    "height": 400  // Set fixed height
   };
   vegaEmbed('#chart1', spec1, { actions: false });
   
@@ -52,36 +52,58 @@ const spec1 = {
     ],
     "resolve": { "scale": { "y": "independent" } },
     "autosize": { "type": "fit", "contains": "padding" },
-    "width": 480,  // Set fixed width
-    "height": 350  // Set fixed height
+    "width": 500,  // Set fixed width
+    "height": 400  // Set fixed height
   };
   vegaEmbed('#chart2', spec2, { actions: false });
   
-  // Chart 3: Proportional Symbol Map (Total Animals Rescued)
+  // Chart 3: Proportional Symbol Map (Total Animals Rescued) with Zoom and Pan
   const spec3 = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "background": null,
     "data": { "url": "Graph_Data.csv", "format": { "type": "csv" } },
     "projection": { "type": "mercator" },
     "layer": [
-      { "data": { "url": "vic_localities.json", "format": { "type": "topojson", "feature": "vic_localities" } }, "mark": { "type": "geoshape", "fill": "#e0e0e0", "stroke": "white" } },
-      { 
-        "mark": { "type": "circle", "opacity": 0.8, "stroke": "black", "strokeWidth": 1.5 }, 
-        "encoding": { 
-          "longitude": { "field": "Longitude", "type": "quantitative" }, 
-          "latitude": { "field": "Latitude", "type": "quantitative" }, 
-          "size": { "field": "Total Animals", "type": "quantitative" }, 
-          "color": { "field": "Total Animals", "type": "quantitative", "scale": { "scheme": "blues" } }, 
+      {
+        "data": {
+          "url": "vic_localities.json",
+          "format": { "type": "topojson", "feature": "vic_localities" }
+        },
+        "mark": { "type": "geoshape", "fill": "#e0e0e0", "stroke": "white" }
+      },
+      {
+        "mark": {
+          "type": "circle",
+          "opacity": 0.8,
+          "stroke": "black",
+          "strokeWidth": 1.5
+        },
+        "encoding": {
+          "longitude": { "field": "Longitude", "type": "quantitative" },
+          "latitude": { "field": "Latitude", "type": "quantitative" },
+          "size": { "field": "Total Animals", "type": "quantitative" },
+          "color": {
+            "field": "Total Animals",
+            "type": "quantitative",
+            "scale": { "scheme": "blues" }
+          },
           "tooltip": [
-            { "field": "Local Government Municipality", "type": "nominal" }, 
+            { "field": "Local Government Municipality", "type": "nominal" },
             { "field": "Total Animals", "type": "quantitative" }
-          ] 
-        } 
+          ]
+        }
       }
     ],
+    "selection": {
+      "grid": {
+        "type": "interval", // Enables zooming and panning
+        "bind": "scales"    // Links the zooming and panning to the scales
+      }
+    },
     "autosize": { "type": "fit", "contains": "padding" },
-    "width": 900,  // Larger fixed width for the map
+    "width": 870,  // Larger fixed width for the map
     "height": 700  // Larger fixed height for the map
   };
   vegaEmbed('#chart3', spec3, { actions: false });
-  
+
+    
