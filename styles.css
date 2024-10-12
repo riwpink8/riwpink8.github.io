@@ -70,7 +70,7 @@ p {
 
 .chart-wrapper,
 .info-wrapper {
-  width: 48%; /* Set width for side-by-side layout */
+  width: 48%;
   text-align: center;
   background-color: var(--color-muted-purple);
   padding: 10px;
@@ -80,10 +80,35 @@ p {
   transition: width 0.5s ease, transform 0.5s ease;
 }
 
+.info-wrapper {
+  background-color: var(--color-muted-purple); /* Match the same color as graph containers */
+}
+
 #chart1, #chart2, #chart3, #chart4, #chart5, #chart6, #chart7, #chart8, #chart9, #chart10 {
   display: block;
   max-width: 100%;
   width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Section for the full-width map */
+#map-section {
+  display: flex;
+  justify-content: center; /* Center the map horizontally */
+  align-items: center;
+  background-color: var(--color-muted-purple); /* Match the color of other containers */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+#chart3 {
+  display: block;
+  width: 100%;
+  max-width: 800px; /* You can adjust this size based on your preference */
   height: auto;
   margin: 0 auto;
 }
@@ -99,6 +124,11 @@ p {
   .info-wrapper {
     width: 100%;
     transform: translateY(0);
+  }
+
+  #map-section {
+    justify-content: center;
+    align-items: center;
   }
 }
 
