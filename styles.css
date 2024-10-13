@@ -1,141 +1,297 @@
-/* styles.css */
-
 /* Define global color variables */
 :root {
-  --color-light-purple: #CFCCD6;
-  --color-soft-pink: #BBC2E2;
-  --color-muted-purple: #B7B5E4;
-  --color-deep-blue: #847979;
-  --color-dark-blue: #322E18;
+  --color-background-white: #FFFFFF;
+  --color-primary-green: #5f9932;
+  --color-secondary-light-green: #dfefda;
+  --color-accent-yellow: #d1dc59;
+  --color-dark-text: #322E18;
 }
 
+/* Global Styles */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: var(--color-light-purple);
-  color: var(--color-dark-blue);
+  background-color: var(--color-background-white);
+  color: var(--color-dark-text);
 }
 
-.container {
+/* Title and Subtitle */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.title-container h1,
+.title-container h2 {
+  margin: 0;
+}
+
+.title-container h1 {
+  font-size: 2.5rem;
+  color: var(--color-dark-text);
+}
+
+.title-container h2 {
+  font-size: 1.5rem;
+  color: var(--color-primary-green);
+  margin: 10px 0;
+}
+
+/* Hero Image */
+.hero-container {
+  text-align: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Green Subtext Block - Full Width */
+.subtext-container {
+  background-color: var(--color-primary-green);
+  color: var(--color-background-white);
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0;
+}
+
+/* Remove rounded corners from large sections */
+.subtext-container,
+.main-content,
+#info-blurbs-section {
+  border-radius: 0;
+}
+
+.subtext-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: var(--color-soft-pink);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-header {
-  background-color: var(--color-dark-blue);
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 40px;
-  border-radius: 8px;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-header p {
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-h2 {
-  font-size: 1.8rem;
-  color: var(--color-deep-blue);
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-p {
-  font-size: 1.1rem;
-  color: var(--color-deep-blue);
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Section for Charts */
-#charts-section {
+/* New Section for Pie Charts and Info Blurb */
+#new-graphs-section {
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 20px;
+}
+
+.graph-container,
+.info-container {
+  width: 32%;
+  background-color: var(--color-background-white);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100%;
+  margin-bottom: 0;
+}
+
+/* Info Content */
+.info-content {
+  margin-bottom: 10px;
+}
+
+.image-container {
+  width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Section for existing charts */
+#charts-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
   margin-bottom: 40px;
-  flex-wrap: nowrap;
-  transition: all 0.5s ease;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 30px;
 }
 
-.chart-wrapper,
-.info-wrapper {
+.chart-wrapper {
+  position: relative; /* Add relative positioning */
   width: 48%;
   text-align: center;
-  background-color: var(--color-muted-purple);
+  background-color: var(--color-background-white);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: width 0.5s ease, transform 0.5s ease;
-}
-
-.info-wrapper {
-  background-color: var(--color-muted-purple); /* Match the same color as graph containers */
-}
-
-#chart1, #chart2, #chart3, #chart4, #chart5, #chart6, #chart7, #chart8, #chart9, #chart10 {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-/* Section for the full-width map */
-#map-section {
   display: flex;
-  justify-content: center; /* Center the map horizontally */
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: var(--color-muted-purple); /* Match the color of other containers */
+  min-height: 600px;
+}
+
+/* Green Hanging Box above Charts */
+.hanging-box {
+  position: absolute;
+  top: -20px; /* Adjust this value to control how much it overlaps */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary-green);
+  color: #FFFFFF; /* Set text color to white */
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 10; /* Ensure the box appears on top of the chart */
+}
+
+#chart1, #chart2 {
+  width: 100%;
+}
+
+/* Section for map */
+#map-section {
+  background-color: var(--color-background-white);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.map-wrapper {
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Section for Testimonials with Word Cloud */
+#testimonials-section {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  margin-bottom: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 20px;
+}
+
+#testimonials-section .chart-wrapper {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  background-color: var(--color-background-white);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px; /* Set minimum height */
 }
 
-#chart3 {
-  display: block;
+/* Hanging Box for Testimonials Section */
+#testimonials-section .hanging-box {
+  position: absolute;
+  top: -20px; /* Adjust this value to control how much it overlaps */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary-green);
+  color: #FFFFFF; /* White text color */
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 10; /* Ensure the box appears on top of the chart */
+}
+
+#testimonials-section .chart-box {
   width: 100%;
-  max-width: 800px; /* You can adjust this size based on your preference */
-  height: auto;
+  height: 400px; /* Set the height for the word cloud */
+}
+
+/* Info Blurbs Section - Full Width */
+#info-blurbs-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 20px;
+}
+
+.info-blurb {
+  background-color: var(--color-background-white);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.info-blurb .info-content {
+  max-width: 1200px;
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
 }
 
-/* Responsive adjustments with media queries */
-@media (max-width: 1100px) {
-  #charts-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .chart-wrapper,
-  .info-wrapper {
-    width: 100%;
-    transform: translateY(0);
-  }
-
-  #map-section {
-    justify-content: center;
-    align-items: center;
-  }
+.info-blurb h2 {
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: var(--color-primary-green);
 }
 
-@media (max-width: 600px) {
-  .chart-wrapper,
-  .info-wrapper {
-    width: 100%;
-    transform: translateY(0);
-  }
+.info-blurb p {
+  font-size: 1.1rem;
+  color: var(--color-dark-text);
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--color-primary-green);
+  color: var(--color-background-white);
+  margin-top: 0;
 }
