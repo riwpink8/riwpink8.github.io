@@ -157,6 +157,7 @@ body {
   line-height: 1.6;
 }
 
+
 /* ==================== CHART STYLES ==================== */
 
 /* Section for charts */
@@ -185,6 +186,117 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 600px;
+}
+
+/* ==================== RESPONSIVE STYLES FOR SMALL SCREENS ==================== */
+
+/* ==================== RESPONSIVE STYLES FOR SMALL SCREENS ==================== */
+
+/* Responsive layout for all charts and sections */
+@media (max-width: 768px) {
+
+  /* Stack all sections vertically */
+  #new-graphs-section,
+  .side-by-side,
+  #charts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add space between stacked items */
+  }
+
+  /* Ensure all containers take full width on smaller screens */
+  .graph-container,
+  .info-container,
+  .chart-wrapper,
+  .euthanasia-info,
+  .cost-info {
+    width: 100% !important; /* Force containers to take full width */
+    margin-bottom: 20px; /* Add space between containers */
+  }
+
+  /* Adjust the charts inside containers */
+  .chart-box {
+    width: 100% !important;
+    height: auto !important; /* Ensure charts scale dynamically */
+  }
+
+  /* Ensure the canvas for charts adjusts properly */
+  .chart-box canvas {
+    width: 100% !important; /* Make sure the canvas inside charts scales down */
+    height: auto !important; /* Maintain the aspect ratio */
+  }
+
+  /* Move the info-container above the graphs in mobile view */
+  #new-graphs-section {
+    flex-direction: column;
+  }
+
+  .info-container {
+    order: -1; /* Move the info box above the charts */
+  }
+}
+
+/* Responsive scaling for pie charts on medium screens */
+@media (max-width: 1200px) {
+  .graph-container {
+    width: 45%; /* Shrink pie charts for medium-sized screens */
+  }
+
+  /* Ensure that legends are properly padded for medium screens */
+  .pie-chart-legend {
+    padding-top: 20px;
+    text-align: center;
+  }
+}
+
+/* Responsive pie charts and layout for smaller screens */
+@media (max-width: 768px) {
+
+  /* Stack the pie charts with full width */
+  .graph-container {
+    width: 100% !important; /* Force pie charts to full width for mobile */
+  }
+
+  /* Ensure the info box takes full width */
+  .info-container {
+    width: 100% !important; /* Make info container full width on mobile */
+    margin-bottom: 20px;
+  }
+
+  /* Add more space between the pie chart and its legend */
+  .pie-chart-legend {
+    padding-top: 25px; /* Increase padding between chart and legend */
+  }
+
+  /* Handle any remaining chart or container scaling issues */
+  .chart-wrapper canvas {
+    width: 100% !important; /* Ensure full-width scaling for charts */
+    height: auto !important; /* Maintain aspect ratio */
+  }
+}
+
+/* Additional adjustments for very small screens */
+@media (max-width: 480px) {
+  .graph-container,
+  .info-container,
+  .chart-wrapper,
+  .euthanasia-info,
+  .cost-info {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
+
+  /* Further adjust pie chart scaling on very small screens */
+  .chart-box canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Ensure legends have enough space on very small screens */
+  .pie-chart-legend {
+    padding-top: 30px;
+    text-align: center;
+  }
 }
 
 /* ==================== SIDE-BY-SIDE LAYOUTS ==================== */
@@ -218,6 +330,7 @@ body {
   text-align: center;
   position: relative;
 }
+
 
 /* Pinning titles to the top of containers */
 .info-blurb h2 {
@@ -271,7 +384,7 @@ body {
 
 /* Full-width Word Cloud Section */
 #testimonials-section {
-  width: 100vw; /* Make the word cloud section full width */
+  width: 100vw;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -284,7 +397,7 @@ body {
 
 .word-cloud-wrapper {
   text-align: center;
-  width: 100%; /* Make the word cloud container full width */
+  width: 100%;
   background-color: var(--color-background-white);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -298,32 +411,14 @@ body {
   height: 400px;
 }
 
-/* Hanging Box for Word Cloud */
-#testimonials-section .hanging-box {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--color-primary-green);
-  color: #FFFFFF;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  z-index: 10;
-}
-
 /* ==================== MAP SECTION ==================== */
 
-/* Section for map with shadow */
 #map-section {
   background-color: var(--color-background-white);
   padding: 10px;
   border-radius: 8px;
   margin: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Increased shadow for the map */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -399,7 +494,6 @@ body {
   background-color: var(--color-accent-yellow);
   color: var(--color-dark-text);
 }
-
 
 /* ==================== FOOTER STYLES ==================== */
 
