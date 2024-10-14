@@ -113,9 +113,17 @@ body {
   margin-bottom: 0;
 }
 
-/* Info Content */
-.info-content {
-  margin-bottom: 10px;
+/* Styles for the large number in the Statistics about Shelters section */
+.large-text {
+  font-size: 2.5rem; /* Larger text size for emphasis */
+  font-weight: bold; /* Make the number bold */
+  color: var(--color-primary-green); /* Optional: Change the color to the green theme color */
+}
+
+.info-content p {
+  font-size: 1.2rem; /* Medium text size for the rest of the sentence */
+  color: var(--color-dark-text); /* Default text color */
+  line-height: 1.6; /* Improve readability */
 }
 
 .image-container {
