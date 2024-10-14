@@ -92,7 +92,7 @@ const spec2 = {
 };
 vegaEmbed('#chart2', spec2, { actions: false });
 
-// Pie Chart 1: Adopted vs Purchased with increased padding for legend
+// Pie Chart 1: Adopted vs Purchased with black percentage text and increased padding for legend
 const pieChart1Spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null, 
@@ -129,12 +129,12 @@ const pieChart1Spec = {
       "mark": {
         "type": "text",
         "radius": 110, 
-        "fontSize": 14,
+        "fontSize": 20,
         "fontWeight": "bold"
       },
       "encoding": {
         "text": {"field": "Percentage", "type": "quantitative", "format": ".1f"}, 
-        "color": {"value": "#ffffff"}, 
+        "color": {"value": "#000000"}, // Black text for percentage
         "theta": {"field": "Percentage", "type": "quantitative", "stack": true}
       }
     }
@@ -143,7 +143,7 @@ const pieChart1Spec = {
 };
 vegaEmbed('#pie-chart1', pieChart1Spec, { actions: false });
 
-// Pie Chart 2: Percentage of Puppies from Puppy Farms with increased padding for legend
+// Pie Chart 2: Percentage of Puppies from Puppy Farms with increased padding for legend and specific positioning for 15% label
 const pieChart2Spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null, 
@@ -179,19 +179,40 @@ const pieChart2Spec = {
     {
       "mark": {
         "type": "text",
-        "radius": 110, 
-        "fontSize": 14,
+        "fontSize": 20,
         "fontWeight": "bold"
       },
       "encoding": {
         "text": {"field": "Percentage", "type": "quantitative", "format": ".1f"}, 
-        "color": {"value": "#ffffff"}, 
-        "theta": {"field": "Percentage", "type": "quantitative", "stack": true}
+        "color": {"value": "#000000"},  // Set all text to black
+        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+        "radius": {
+          "condition": {
+            "test": "datum.Percentage === 15",  // If Percentage equals 15
+            "value": 130  // Adjust the radius for the 15% label
+          },
+          "value": 110  // Default radius for other labels
+        },
+        "dx": {
+          "condition": {
+            "test": "datum.Percentage === 15",  // If Percentage equals 15
+            "value": -0  // Horizontal offset only for 15%
+          },
+          "value": 0  // Default for other labels
+        },
+        "dy": {
+          "condition": {
+            "test": "datum.Percentage === 15",  // If Percentage equals 15
+            "value": -10  // Vertical offset only for 15%
+          },
+          "value": 0  // Default for other labels
+        }
       }
     }
   ],
   "view": {"stroke": null} 
 };
+
 vegaEmbed('#pie-chart2', pieChart2Spec, { actions: false });
 
 // Proportional Symbol Map for Victorian Shelters with hover-only tooltips and fix for data format

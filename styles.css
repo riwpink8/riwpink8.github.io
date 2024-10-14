@@ -62,7 +62,7 @@ body {
 
 /* ==================== SUBTEXT SECTION ==================== */
 
-/* Green Subtext Block - Full Width */
+/* Green Subtext Block */
 .subtext-container {
   background-color: var(--color-primary-green);
   color: var(--color-background-white);
@@ -70,15 +70,13 @@ body {
   padding: 20px;
   font-weight: bold;
   font-size: 1.1rem;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 0;
+  max-width: 100%; /* Ensure it doesn't exceed the container */
+  margin: 0;
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
 .subtext-content {
-  max-width: 1200px;
+  max-width: 1200px; /* Limit the maximum width of the content */
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
@@ -107,13 +105,6 @@ body {
   margin: 0;
 }
 
-/* Remove rounded corners from large sections */
-.subtext-container,
-.main-content,
-#info-blurbs-section {
-  border-radius: 0;
-}
-
 /* ==================== PIE CHARTS & INFO SECTION ==================== */
 
 /* New Section for Pie Charts and Info Blurb */
@@ -124,13 +115,12 @@ body {
   gap: 20px;
   padding-left: 5px;
   padding-right: 5px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .graph-container,
 .info-container {
-  width: 32%;
+  width: calc(100% / 3); /* Make each column take equal width */
   background-color: var(--color-background-white);
   padding: 10px;
   border-radius: 8px;
@@ -140,11 +130,9 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 100%;
   margin-bottom: 0;
 }
 
-/* Large text for statistics */
 .large-text {
   font-size: 2.5rem;
   font-weight: bold;
@@ -156,7 +144,6 @@ body {
   color: var(--color-dark-text);
   line-height: 1.6;
 }
-
 
 /* ==================== CHART STYLES ==================== */
 
@@ -190,9 +177,6 @@ body {
 
 /* ==================== RESPONSIVE STYLES FOR SMALL SCREENS ==================== */
 
-/* ==================== RESPONSIVE STYLES FOR SMALL SCREENS ==================== */
-
-/* Responsive layout for all charts and sections */
 @media (max-width: 768px) {
 
   /* Stack all sections vertically */
@@ -201,7 +185,7 @@ body {
   #charts-section {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Add space between stacked items */
+    gap: 20px;
   }
 
   /* Ensure all containers take full width on smaller screens */
@@ -210,8 +194,8 @@ body {
   .chart-wrapper,
   .euthanasia-info,
   .cost-info {
-    width: 100% !important; /* Force containers to take full width */
-    margin-bottom: 20px; /* Add space between containers */
+    width: 100% !important;
+    margin-bottom: 20px;
   }
 
   /* Adjust the charts inside containers */
@@ -222,7 +206,7 @@ body {
 
   /* Ensure the canvas for charts adjusts properly */
   .chart-box canvas {
-    width: 100% !important; /* Make sure the canvas inside charts scales down */
+    width: 100% !important;
     height: auto !important; /* Maintain the aspect ratio */
   }
 
@@ -245,56 +229,6 @@ body {
   /* Ensure that legends are properly padded for medium screens */
   .pie-chart-legend {
     padding-top: 20px;
-    text-align: center;
-  }
-}
-
-/* Responsive pie charts and layout for smaller screens */
-@media (max-width: 768px) {
-
-  /* Stack the pie charts with full width */
-  .graph-container {
-    width: 100% !important; /* Force pie charts to full width for mobile */
-  }
-
-  /* Ensure the info box takes full width */
-  .info-container {
-    width: 100% !important; /* Make info container full width on mobile */
-    margin-bottom: 20px;
-  }
-
-  /* Add more space between the pie chart and its legend */
-  .pie-chart-legend {
-    padding-top: 25px; /* Increase padding between chart and legend */
-  }
-
-  /* Handle any remaining chart or container scaling issues */
-  .chart-wrapper canvas {
-    width: 100% !important; /* Ensure full-width scaling for charts */
-    height: auto !important; /* Maintain aspect ratio */
-  }
-}
-
-/* Additional adjustments for very small screens */
-@media (max-width: 480px) {
-  .graph-container,
-  .info-container,
-  .chart-wrapper,
-  .euthanasia-info,
-  .cost-info {
-    width: 100% !important;
-    margin-bottom: 15px;
-  }
-
-  /* Further adjust pie chart scaling on very small screens */
-  .chart-box canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  /* Ensure legends have enough space on very small screens */
-  .pie-chart-legend {
-    padding-top: 30px;
     text-align: center;
   }
 }
@@ -404,6 +338,7 @@ body {
   padding: 20px;
   margin: 0 auto;
   position: relative;
+  margin-top: -15px;
 }
 
 #word-cloud {
