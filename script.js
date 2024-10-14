@@ -11,17 +11,70 @@ const spec1 = {
     {
       "mark": "bar",
       "encoding": {
-        "y": { "field": "Cost Item", "type": "nominal", "sort": ["Initial purchase", "Desexing", "Puppy vaccinations", "Microchipping", "Total", "Name tag"], "axis": { "labelAngle": -45, "title": null } },
-        "x": { "field": "NegativeAdoption", "type": "quantitative", "title": "Cost ($)" },
-        "color": { "value": "#c63362" }
+        "y": { 
+          "field": "Cost Item", 
+          "type": "nominal", 
+          // Change the sort order with "Initial purchase" second-last
+          "sort": [
+            "Puppy vaccinations", 
+            "Puppy training", 
+            "Desexing", 
+            "Bed or kennel", 
+            "Harnesses", 
+            "Preventative treatments", 
+            "Food and bowls", 
+            "Microchipping", 
+            "Name tag", 
+            "Toys and treats", 
+            "Initial purchase", 
+            "Total"
+          ], 
+          "axis": { "labelAngle": -45, "title": null } 
+        },
+        // Add custom formatting to remove the negative sign on the axis
+        "x": { 
+          "field": "NegativeAdoption", 
+          "type": "quantitative", 
+          "title": "Cost ($)",
+          "axis": { 
+            "format": "~s"  // Removes the minus sign from axis labels
+          }
+        },
+        "color": { "value": "#c63362" } // Color for Adoption
       }
     },
     {
       "mark": "bar",
       "encoding": {
-        "y": { "field": "Cost Item", "type": "nominal" },
-        "x": { "field": "Purchasing", "type": "quantitative" },
-        "color": { "value": "#599335" }
+        "y": { 
+          "field": "Cost Item", 
+          "type": "nominal", 
+          // Apply the same sort order to the Purchasing layer
+          "sort": [
+            "Puppy vaccinations", 
+            "Puppy training", 
+            "Desexing", 
+            "Bed or kennel", 
+            "Harnesses", 
+            "Preventative treatments", 
+            "Food and bowls", 
+            "Microchipping", 
+            "Name tag", 
+            "Toys and treats", 
+            "Initial purchase", 
+            "Total"
+          ], 
+          "axis": { "labelAngle": -45, "title": null } 
+        },
+        // Add custom formatting to remove the negative sign on the axis
+        "x": { 
+          "field": "Purchasing", 
+          "type": "quantitative", 
+          "axis": { 
+            "format": "~s"  // Removes the minus sign from axis labels
+          }
+        },
+        "color": { "value": "#599335" } // Color for Purchasing
       }
     }
   ],
@@ -36,6 +89,7 @@ const spec1 = {
   "width": "container",
   "height": 400
 };
+
 vegaEmbed('#chart1', spec1, { actions: false });
 
 // Chart 2: Euthanasia Rates Over Time with Tooltip and Annotation
@@ -128,11 +182,17 @@ const pieChart1Spec = {
     {
       "mark": {
         "type": "text",
-        "radius": 110, 
         "fontSize": 20,
         "fontWeight": "bold"
       },
       "encoding": {
+        "radius": {
+          "condition": {
+            "test": "datum.Percentage == 3.6",  // Move only 3.6% label outside
+            "value": 200  // Increased radius for 3.6%
+          },
+          "value": 100  // Default radius for other labels
+        },
         "text": {"field": "Percentage", "type": "quantitative", "format": ".1f"}, 
         "color": {"value": "#000000"}, // Black text for percentage
         "theta": {"field": "Percentage", "type": "quantitative", "stack": true}
@@ -141,14 +201,15 @@ const pieChart1Spec = {
   ],
   "view": {"stroke": null} 
 };
+
 vegaEmbed('#pie-chart1', pieChart1Spec, { actions: false });
 
-// Pie Chart 2: Percentage of Puppies from Puppy Farms with increased padding for legend and specific positioning for 15% label
+// Pie Chart 2: Percentage of Puppies from Puppy Farms with adjusted labels
 const pieChart2Spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": null, 
+  "background": null,
   "data": {
-    "url": "assets/graph_data/Puppy_Farm_Stats.csv", 
+    "url": "assets/graph_data/Puppy_Farm_Stats.csv",
     "format": {"type": "csv"}
   },
   "encoding": {
@@ -158,12 +219,12 @@ const pieChart2Spec = {
       "type": "nominal",
       "scale": {
         "domain": ["Puppy Farm", "Registered Breeder"],
-        "range": ["#c23e37", "#d6692b"] 
+        "range": ["#c23e37", "#d6692b"] // Red for Puppy Farm, Orange for Registered Breeder
       },
       "legend": {
-        "orient": "bottom", 
+        "orient": "bottom",
         "padding": 50,  // Increased padding between chart and legend
-        "title": null 
+        "title": null
       }
     }
   },
@@ -179,40 +240,19 @@ const pieChart2Spec = {
     {
       "mark": {
         "type": "text",
+        "radius": 100,  // Adjust the radius for positioning of the labels
         "fontSize": 20,
-        "fontWeight": "bold"
+        "fontWeight": "bold",
+        "fill": "black"  // Set the text color to black
       },
       "encoding": {
-        "text": {"field": "Percentage", "type": "quantitative", "format": ".1f"}, 
-        "color": {"value": "#000000"},  // Set all text to black
-        "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
-        "radius": {
-          "condition": {
-            "test": "datum.Percentage === 15",  // If Percentage equals 15
-            "value": 130  // Adjust the radius for the 15% label
-          },
-          "value": 110  // Default radius for other labels
-        },
-        "dx": {
-          "condition": {
-            "test": "datum.Percentage === 15",  // If Percentage equals 15
-            "value": -0  // Horizontal offset only for 15%
-          },
-          "value": 0  // Default for other labels
-        },
-        "dy": {
-          "condition": {
-            "test": "datum.Percentage === 15",  // If Percentage equals 15
-            "value": -10  // Vertical offset only for 15%
-          },
-          "value": 0  // Default for other labels
-        }
+        // Replace "textik" with your Percentage field for display
+        "text": {"field": "Percentage", "type": "quantitative", "format": ".1f"}
       }
     }
   ],
-  "view": {"stroke": null} 
+  "view": {"stroke": null}
 };
-
 vegaEmbed('#pie-chart2', pieChart2Spec, { actions: false });
 
 // Proportional Symbol Map for Victorian Shelters with hover-only tooltips and fix for data format
@@ -270,43 +310,104 @@ vegaEmbed('#chart3', spec3, { actions: false });
 // Word Cloud for Testimonials
 const wordCloudSpec = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Word cloud of testimonials from adopters.",
-  "width": 850,
+  "description": "Word cloud based on provided words and their counts.",
+  "width": 800,
   "height": 400,
   "padding": 0,
-  "data": {
-    "url": "assets/graph_data/Word_Cloud.csv",
-    "format": { "type": "csv" }  
-  },
+
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect", "Perfect",
+        "Great", "Great", "Great", "Great", "Great", "Great",
+        "Best", "Best", "Best", "Best", "Best", "Best",
+        "Joy",
+        "Healthy", "Healthy",
+        "Amazing", "Amazing", "Amazing", "Amazing",
+        "Glad", "Glad", "Glad", "Glad",
+        "Lovely", "Lovely", "Lovely", "Lovely", "Lovely", "Lovely", "Lovely", "Lovely",
+        "Pleasure",
+        "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love", "Love",
+        "Adore", "Adore", "Adore",
+        "Happy", "Happy", "Happy", "Happy", "Happy", "Happy",
+        "Sweet", "Sweet", "Sweet",
+        "Grateful", "Grateful", "Grateful", "Grateful", "Grateful", "Grateful",
+        "Delighted", "Delighted", "Delighted",
+        "Thrilled",
+        "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful", "Beautiful",
+        "Fabulous",
+        "Gorgeous",
+        "Wonderful", "Wonderful",
+        "Thankful",
+        "Companionship",
+        "Family", "Family", "Family", "Family", "Family", "Family", "Family", "Family", "Family", "Family",
+        "Loyal",
+        "Affectionate", "Affectionate", "Affectionate",
+        "Awesome", "Awesome"
+      ],
+      "transform": [
+        {
+          "type": "countpattern",
+          "field": "data",
+          "case": "upper",
+          "pattern": "[\\w']{3,}",
+          "stopwords": "(i|me|my|myself|we|us|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|whose|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|will|would|should|can|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|upon|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall)"
+        },
+        {
+          "type": "formula", "as": "angle",
+          "expr": "[-45, 0, 45][~~(random() * 3)]"
+        },
+        {
+          "type": "formula", "as": "weight",
+          "expr": "if(datum.text=='LOVE', 600, 300)"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "table", "field": "text"},
+      "range": ["#c23e37", "#d6692b", "#599335"]
+    }
+  ],
+
   "marks": [
     {
       "type": "text",
+      "from": {"data": "table"},
       "encode": {
         "enter": {
-          "text": { "field": "Words" },  
-          "align": { "value": "center" },
-          "baseline": { "value": "alphabetic" },
-          "fill": { "value": "#5f9932" }  
+          "text": {"field": "text"},
+          "align": {"value": "center"},
+          "baseline": {"value": "alphabetic"},
+          "fill": {"scale": "color", "field": "text"}
         },
         "update": {
-          "fillOpacity": { "value": 1 }
+          "fillOpacity": {"value": 1}
         },
         "hover": {
-          "fillOpacity": { "value": 0.7 }
+          "fillOpacity": {"value": 0.5}
         }
       },
       "transform": [
         {
           "type": "wordcloud",
-          "size": [850, 400],  
-          "text": { "field": "Words" },  
+          "size": [800, 400],
+          "text": {"field": "text"},
+          "rotate": {"field": "datum.angle"},
           "font": "Helvetica Neue, Arial",
-          "fontSize": { "field": "Count" },  
-          "fontSizeRange": [12, 56],  
-          "padding": 2  
+          "fontSize": {"field": "datum.count"},
+          "fontWeight": {"field": "datum.weight"},
+          "fontSizeRange": [12, 56],
+          "padding": 2
         }
       ]
     }
   ]
 };
+
 vegaEmbed('#word-cloud', wordCloudSpec, { actions: false });

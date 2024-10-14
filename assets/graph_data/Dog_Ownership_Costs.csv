@@ -1,5 +1,4 @@
 ﻿Cost Item,Adoption,Purchasing
-Initial purchase,500,5000
 Puppy vaccinations,0,250
 Puppy training,0,170
 Desexing,0,500
@@ -9,5 +8,6 @@ Preventative treatments,0,300
 Food and bowls,90,90
 Microchipping,80,80
 Name Tag,20,20
+Initial purchase,500,5000
 Toys and treats,50,50
 Total,1040,6760
