@@ -1,3 +1,5 @@
+/* ==================== GLOBAL STYLES ==================== */
+
 /* Define global color variables */
 :root {
   --color-background-white: #FFFFFF;
@@ -15,6 +17,8 @@ body {
   background-color: var(--color-background-white);
   color: var(--color-dark-text);
 }
+
+/* ==================== HEADER STYLES ==================== */
 
 /* Title and Subtitle */
 .title-container {
@@ -56,6 +60,8 @@ body {
   margin: 0 auto;
 }
 
+/* ==================== SUBTEXT SECTION ==================== */
+
 /* Green Subtext Block - Full Width */
 .subtext-container {
   background-color: var(--color-primary-green);
@@ -71,6 +77,29 @@ body {
   margin-bottom: 0;
 }
 
+.subtext-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ==================== TREND HEADING ==================== */
+
+/* "The Current Trend" Heading */
+.trend-container {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--color-secondary-light-green);
+}
+
+.trend-container h2 {
+  font-size: 1.8rem;
+  color: var(--color-dark-text);
+}
+
+/* ==================== MAIN CONTENT ==================== */
+
 /* Ensure light green background covers all sections below the subtext */
 .main-content {
   background-color: var(--color-secondary-light-green);
@@ -85,12 +114,7 @@ body {
   border-radius: 0;
 }
 
-.subtext-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+/* ==================== PIE CHARTS & INFO SECTION ==================== */
 
 /* New Section for Pie Charts and Info Blurb */
 #new-graphs-section {
@@ -102,7 +126,6 @@ body {
   padding-right: 5px;
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: var(--color-secondary-light-green);
 }
 
 .graph-container,
@@ -121,7 +144,7 @@ body {
   margin-bottom: 0;
 }
 
-/* Styles for the large number in the Statistics about Shelters section */
+/* Large text for statistics */
 .large-text {
   font-size: 2.5rem;
   font-weight: bold;
@@ -134,14 +157,7 @@ body {
   line-height: 1.6;
 }
 
-.image-container {
-  width: 100%;
-}
-
-.image-container img {
-  width: 100%;
-  border-radius: 8px;
-}
+/* ==================== CHART STYLES ==================== */
 
 /* Section for charts */
 #charts-section {
@@ -170,6 +186,8 @@ body {
   align-items: center;
   min-height: 600px;
 }
+
+/* ==================== SIDE-BY-SIDE LAYOUTS ==================== */
 
 /* Side-by-side container for euthanasia and cost sections */
 .side-by-side {
@@ -226,6 +244,8 @@ body {
   text-align: center;
 }
 
+/* ==================== HANGING BOXES ==================== */
+
 /* Green Hanging Box above Charts */
 .hanging-box {
   position: absolute;
@@ -246,6 +266,8 @@ body {
 #chart1, #chart2 {
   width: 100%;
 }
+
+/* ==================== WORD CLOUD SECTION ==================== */
 
 /* Full-width Word Cloud Section */
 #testimonials-section {
@@ -293,6 +315,8 @@ body {
   z-index: 10;
 }
 
+/* ==================== MAP SECTION ==================== */
+
 /* Section for map with shadow */
 #map-section {
   background-color: var(--color-background-white);
@@ -313,11 +337,93 @@ body {
   max-width: 900px;
 }
 
-/* Footer */
+/* ============ SOURCES PAGE STYLES ============ */
+
+/* Sources Section */
+#sources-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 5px;
+  background-color: var(--color-secondary-light-green);
+}
+
+.sources-container {
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--color-background-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  text-align: left;
+}
+
+.sources-container h2 {
+  font-size: 1.8rem;
+  color: var(--color-primary-green);
+  margin-bottom: 15px;
+}
+
+.sources-container ul {
+  padding-left: 20px;
+}
+
+.sources-container ul li {
+  font-size: 1.1rem;
+  color: var(--color-dark-text);
+  margin-bottom: 10px;
+}
+
+.sources-container ul li a {
+  color: var(--color-primary-green);
+  text-decoration: none;
+}
+
+.sources-container ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Footer button styling */
+.footer-button {
+  background-color: var(--color-primary-green);
+  color: var(--color-background-white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+.footer-button:hover {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-dark-text);
+}
+
+
+/* ==================== FOOTER STYLES ==================== */
+
 footer {
   text-align: center;
   padding: 20px;
   background-color: var(--color-primary-green);
   color: var(--color-background-white);
   margin-top: 0;
+}
+
+footer .footer-button {
+  background-color: var(--color-background-white);
+  color: var(--color-primary-green);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+footer .footer-button:hover {
+  background-color: var(--color-secondary-light-green);
 }
