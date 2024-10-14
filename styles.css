@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: var(--color-background-white);
+  background-color: var(--color-secondary-light-green); /* Light green background for the entire graph area */
   color: var(--color-dark-text);
 }
 
@@ -95,6 +95,7 @@ body {
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 20px;
+  background-color: var(--color-secondary-light-green); /* Light green background continues here */
 }
 
 .graph-container,
@@ -135,7 +136,7 @@ body {
   border-radius: 8px;
 }
 
-/* Section for existing charts */
+/* Section for charts */
 #charts-section {
   display: flex;
   justify-content: center;
@@ -145,10 +146,11 @@ body {
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 30px;
+  background-color: var(--color-secondary-light-green); /* Light green background continues here */
 }
 
 .chart-wrapper {
-  position: relative; /* Add relative positioning */
+  position: relative;
   width: 48%;
   text-align: center;
   background-color: var(--color-background-white);
@@ -162,6 +164,61 @@ body {
   min-height: 600px;
 }
 
+/* Side-by-side container for euthanasia and cost sections */
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 40px;
+  position: relative;
+  margin-top: 40px;
+  background-color: var(--color-secondary-light-green); /* Light green background */
+}
+
+.chart-wrapper,
+.euthanasia-info,
+.cost-info {
+  width: 48%;
+  background-color: var(--color-background-white);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center;
+  text-align: center;
+  position: relative; /* Required for positioning title */
+}
+
+/* Pinning titles to the top of containers */
+.info-blurb h2 {
+  position: absolute;
+  top: 35px; /* Adjust this value for vertical position */
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.5rem; /* Adjust to match the size of chart titles */
+  color: var(--color-dark-text); /* Set title color to black */
+}
+
+.info-blurb .info-content {
+  padding-top: 80px; /* Increased padding for more space below the title */
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+}
+
+.info-blurb p {
+  font-size: 1.2rem; /* Slightly larger font size for better readability */
+  color: var(--color-dark-text);
+  line-height: 1.6;
+  text-align: center;
+}
+
 /* Green Hanging Box above Charts */
 .hanging-box {
   position: absolute;
@@ -169,18 +226,58 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--color-primary-green);
-  color: #FFFFFF; /* Set text color to white */
+  color: #FFFFFF;
   padding: 10px 20px;
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
-  z-index: 10; /* Ensure the box appears on top of the chart */
+  z-index: 10;
 }
 
-#chart1, #chart2 {
+/* Full-width Word Cloud Section */
+#testimonials-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-secondary-light-green); /* Light green background */
+  padding: 20px 5px;
+  position: relative;
+}
+
+.word-cloud-wrapper {
+  text-align: center;
   width: 100%;
+  max-width: 900px;
+  background-color: var(--color-background-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#word-cloud {
+  width: 100%;
+  height: 400px;
+}
+
+/* Hanging Box for Word Cloud */
+#testimonials-section .hanging-box {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary-green);
+  color: #FFFFFF;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 10;
 }
 
 /* Section for map */
@@ -201,98 +298,6 @@ body {
   text-align: center;
   width: 100%;
   max-width: 900px;
-}
-
-/* Section for Testimonials with Word Cloud */
-#testimonials-section {
-  display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  margin-bottom: 40px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 20px;
-}
-
-#testimonials-section .chart-wrapper {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  background-color: var(--color-background-white);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px; /* Set minimum height */
-}
-
-/* Hanging Box for Testimonials Section */
-#testimonials-section .hanging-box {
-  position: absolute;
-  top: -20px; /* Adjust this value to control how much it overlaps */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--color-primary-green);
-  color: #FFFFFF; /* White text color */
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  z-index: 10; /* Ensure the box appears on top of the chart */
-}
-
-#testimonials-section .chart-box {
-  width: 100%;
-  height: 400px; /* Set the height for the word cloud */
-}
-
-/* Info Blurbs Section - Full Width */
-#info-blurbs-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: 0;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 20px;
-}
-
-.info-blurb {
-  background-color: var(--color-background-white);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 0;
-}
-
-.info-blurb .info-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-}
-
-.info-blurb h2 {
-  margin-bottom: 15px;
-  font-size: 1.8rem;
-  color: var(--color-primary-green);
-}
-
-.info-blurb p {
-  font-size: 1.1rem;
-  color: var(--color-dark-text);
-  line-height: 1.5;
 }
 
 /* Footer */
