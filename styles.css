@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: var(--color-secondary-light-green); /* Light green background for the entire graph area */
+  background-color: var(--color-background-white);
   color: var(--color-dark-text);
 }
 
@@ -71,6 +71,13 @@ body {
   margin-bottom: 0;
 }
 
+/* Ensure light green background covers all sections below the subtext */
+.main-content {
+  background-color: var(--color-secondary-light-green);
+  padding: 0;
+  margin: 0;
+}
+
 /* Remove rounded corners from large sections */
 .subtext-container,
 .main-content,
@@ -91,11 +98,11 @@ body {
   justify-content: space-between;
   align-items: stretch;
   gap: 20px;
-  margin: 0;
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 20px;
-  background-color: var(--color-secondary-light-green); /* Light green background continues here */
+  padding-bottom: 20px;
+  background-color: var(--color-secondary-light-green);
 }
 
 .graph-container,
@@ -116,15 +123,15 @@ body {
 
 /* Styles for the large number in the Statistics about Shelters section */
 .large-text {
-  font-size: 2.5rem; /* Larger text size for emphasis */
-  font-weight: bold; /* Make the number bold */
-  color: var(--color-primary-green); /* Optional: Change the color to the green theme color */
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-primary-green);
 }
 
 .info-content p {
-  font-size: 1.2rem; /* Medium text size for the rest of the sentence */
-  color: var(--color-dark-text); /* Default text color */
-  line-height: 1.6; /* Improve readability */
+  font-size: 1.2rem;
+  color: var(--color-dark-text);
+  line-height: 1.6;
 }
 
 .image-container {
@@ -142,11 +149,11 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   padding-left: 5px;
   padding-right: 5px;
-  padding-top: 30px;
-  background-color: var(--color-secondary-light-green); /* Light green background continues here */
+  padding-top: 20px;
+  background-color: var(--color-secondary-light-green);
 }
 
 .chart-wrapper {
@@ -174,8 +181,8 @@ body {
   padding-right: 5px;
   margin-bottom: 40px;
   position: relative;
-  margin-top: 40px;
-  background-color: var(--color-secondary-light-green); /* Light green background */
+  margin-top: 0;
+  background-color: var(--color-secondary-light-green);
 }
 
 .chart-wrapper,
@@ -188,32 +195,32 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  position: relative; /* Required for positioning title */
+  position: relative;
 }
 
 /* Pinning titles to the top of containers */
 .info-blurb h2 {
   position: absolute;
-  top: 35px; /* Adjust this value for vertical position */
+  top: 35px;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  font-size: 1.5rem; /* Adjust to match the size of chart titles */
-  color: var(--color-dark-text); /* Set title color to black */
+  font-size: 1.5rem;
+  color: var(--color-dark-text);
 }
 
 .info-blurb .info-content {
-  padding-top: 80px; /* Increased padding for more space below the title */
+  padding-top: 80px;
   padding-left: 30px;
   padding-right: 30px;
   text-align: center;
 }
 
 .info-blurb p {
-  font-size: 1.2rem; /* Slightly larger font size for better readability */
+  font-size: 1.2rem;
   color: var(--color-dark-text);
   line-height: 1.6;
   text-align: center;
@@ -222,7 +229,7 @@ body {
 /* Green Hanging Box above Charts */
 .hanging-box {
   position: absolute;
-  top: -20px; /* Adjust this value to control how much it overlaps */
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--color-primary-green);
@@ -236,20 +243,26 @@ body {
   z-index: 10;
 }
 
+#chart1, #chart2 {
+  width: 100%;
+}
+
 /* Full-width Word Cloud Section */
 #testimonials-section {
+  width: 100vw; /* Make the word cloud section full width */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-secondary-light-green); /* Light green background */
+  background-color: var(--color-secondary-light-green);
   padding: 20px 5px;
   position: relative;
 }
 
 .word-cloud-wrapper {
   text-align: center;
-  width: 100%;
-  max-width: 900px;
+  width: 100%; /* Make the word cloud container full width */
   background-color: var(--color-background-white);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -280,13 +293,13 @@ body {
   z-index: 10;
 }
 
-/* Section for map */
+/* Section for map with shadow */
 #map-section {
   background-color: var(--color-background-white);
   padding: 10px;
   border-radius: 8px;
   margin: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Increased shadow for the map */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -157,11 +157,14 @@ const spec2 = {
 
 vegaEmbed('#chart2', spec2, { actions: false });
 
-// Chart 3: Proportional Symbol Map (Total Animals Rescued) with Zoom and Pan
+// Proportional Symbol Map for Victorian Shelters with Hover-Only Tooltips
 const spec3 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null,
-  "data": { "url": "assets/graph_data/Rescues_Per_Municipality.csv", "format": { "type": "csv" } },
+  "data": {
+    "url": "assets/graph_data/Rescues_Per_Municipality.csv",
+    "format": { "type": "csv" }
+  },
   "projection": { "type": "mercator" },
   "layer": [
     {
@@ -181,22 +184,22 @@ const spec3 = {
       "encoding": {
         "longitude": { "field": "Longitude", "type": "quantitative" },
         "latitude": { "field": "Latitude", "type": "quantitative" },
-        "size": { "field": "Total Animals", "type": "quantitative" },
+        "size": { "field": "Dogs", "type": "quantitative", "title": "Dogs Admitted" },
         "color": {
-          "field": "Total Animals",
+          "field": "Dogs",
           "type": "quantitative",
-          "scale": { "scheme": "blues" }
+          "scale": { "scheme": "purples" }
         },
         "tooltip": [
-          { "field": "Local Government Municipality", "type": "nominal" },
-          { "field": "Total Animals", "type": "quantitative" }
+          { "field": "Trading name", "title": "Shelter Name", "type": "nominal" },
+          { "field": "Dogs", "title": "Dogs Admitted", "type": "quantitative" }
         ]
       }
     }
   ],
   "selection": {
     "grid": {
-      "type": "interval", 
+      "type": "interval",
       "bind": "scales"
     }
   },
@@ -204,6 +207,7 @@ const spec3 = {
   "width": 870,
   "height": 700
 };
+
 vegaEmbed('#chart3', spec3, { actions: false });
 
 // Pie Chart 1: Adopted vs Purchased
@@ -308,39 +312,50 @@ const pieChart2Spec = {
 };
 vegaEmbed('#pie-chart2', pieChart2Spec, { actions: false });
 
-// Word Cloud Chart (Testimonials From Adopters)
+// Word Cloud for Testimonials
 const wordCloudSpec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Word cloud of testimonials from adopters.",
+  "width": 850,
+  "height": 400,
+  "padding": 0,
+
   "data": {
     "url": "assets/graph_data/Word_Cloud.csv",
-    "format": { "type": "csv" }
+    "format": { "type": "csv" }  // Loading the CSV data
   },
-  "mark": {
-    "type": "text",
-    "tooltip": true
-  },
-  "encoding": {
-    "text": { "field": "Words", "type": "nominal" },
-    "size": { "field": "Count", "type": "quantitative", "scale": { "range": [10, 100] } },
-    "color": { "value": "#5f9932" },
-    "x": {
-      "field": "Words",
-      "type": "nominal",
-      "axis": null,
-      "sort": "random"
-    },
-    "y": {
-      "field": "Words",
-      "type": "nominal",
-      "axis": null,
-      "sort": "random"
+
+  "marks": [
+    {
+      "type": "text",
+      "from": { "data": "table" },
+      "encode": {
+        "enter": {
+          "text": { "field": "Words" },  // Word text
+          "align": { "value": "center" },
+          "baseline": { "value": "alphabetic" },
+          "fill": { "value": "#5f9932" }  // Fixed color
+        },
+        "update": {
+          "fillOpacity": { "value": 1 }
+        },
+        "hover": {
+          "fillOpacity": { "value": 0.7 }
+        }
+      },
+      "transform": [
+        {
+          "type": "wordcloud",
+          "size": [850, 400],  // Canvas size for the word cloud
+          "text": { "field": "Words" },  // Field for the words
+          "font": "Helvetica Neue, Arial",
+          "fontSize": { "field": "Count" },  // Size based on word count
+          "fontSizeRange": [12, 56],  // Size scaling range
+          "padding": 2  // Space between words
+        }
+      ]
     }
-  },
-  "config": {
-    "view": { "stroke": "transparent" }
-  },
-  "autosize": { "type": "fit", "contains": "padding" },
-  "width": 850, 
-  "height": 400
+  ]
 };
+
 vegaEmbed('#word-cloud', wordCloudSpec, { actions: false });
