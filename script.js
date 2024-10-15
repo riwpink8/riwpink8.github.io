@@ -1,11 +1,12 @@
-// Chart 1: Diverging Bar Chart (Adoption vs Purchasing)
+// Chart 1: Diverging Bar Chart (Adoption vs Purchasing) with Centered Legend
 const spec1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null, 
   "data": { "url": "assets/graph_data/Dog_Ownership_Costs.csv", "format": { "type": "csv" } },
   "transform": [
     { "calculate": "datum['Cost Item'] === 'Name Tag' ? 'Name tag' : datum['Cost Item']", "as": "Cost Item" },
-    { "calculate": "-datum.Adoption", "as": "NegativeAdoption" }
+    { "calculate": "-datum.Adoption", "as": "Adoption" }, // Rename NegativeAdoption to Adoption
+    { "fold": ["Adoption", "Purchasing"], "as": ["Cost Type", "Cost"] } // Fold to create a common field for the color legend
   ],
   "layer": [
     {
@@ -14,7 +15,6 @@ const spec1 = {
         "y": { 
           "field": "Cost Item", 
           "type": "nominal", 
-          // Change the sort order with "Initial purchase" second-last
           "sort": [
             "Puppy vaccinations", 
             "Puppy training", 
@@ -31,50 +31,30 @@ const spec1 = {
           ], 
           "axis": { "labelAngle": -45, "title": null } 
         },
-        // Add custom formatting to remove the negative sign on the axis
         "x": { 
-          "field": "NegativeAdoption", 
+          "field": "Cost", 
           "type": "quantitative", 
           "title": "Cost ($)",
           "axis": { 
             "format": "~s"  // Removes the minus sign from axis labels
           }
         },
-        "color": { "value": "#c63362" } // Color for Adoption
-      }
-    },
-    {
-      "mark": "bar",
-      "encoding": {
-        "y": { 
-          "field": "Cost Item", 
-          "type": "nominal", 
-          // Apply the same sort order to the Purchasing layer
-          "sort": [
-            "Puppy vaccinations", 
-            "Puppy training", 
-            "Desexing", 
-            "Bed or kennel", 
-            "Harnesses", 
-            "Preventative treatments", 
-            "Food and bowls", 
-            "Microchipping", 
-            "Name tag", 
-            "Toys and treats", 
-            "Initial purchase", 
-            "Total"
-          ], 
-          "axis": { "labelAngle": -45, "title": null } 
-        },
-        // Add custom formatting to remove the negative sign on the axis
-        "x": { 
-          "field": "Purchasing", 
-          "type": "quantitative", 
-          "axis": { 
-            "format": "~s"  // Removes the minus sign from axis labels
+        "color": {
+          "field": "Cost Type", 
+          "type": "nominal",
+          "scale": {
+            "domain": ["Adoption", "Purchasing"],
+            "range": ["#c63362", "#599335"] // Colors for Adoption and Purchasing
+          },
+          "legend": {
+            "title": "Cost Type", // Optional: Give a title to the legend
+            "orient": "bottom", // Position the legend at the bottom
+            "padding": 10, // Add padding between the chart and the legend
+            "direction": "horizontal", // Horizontal layout for the legend
+            "legendX": 0.5, // Center the legend
+            "anchor": "middle" // Align legend to the center
           }
-        },
-        "color": { "value": "#599335" } // Color for Purchasing
+        }
       }
     }
   ],
