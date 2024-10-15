@@ -96,57 +96,100 @@ vegaEmbed('#chart1', spec1, { actions: false });
 const spec2 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null,
-  "data": { "url": "assets/graph_data/Euthanasia_Rates.csv", "format": { "type": "csv" } },
-  "encoding": { "x": { "field": "Year", "type": "ordinal", "axis": { "labelAngle": -45 } } },
+  "data": { 
+    "url": "assets/graph_data/Euthanasia_Rates.csv", 
+    "format": { "type": "csv" } 
+  },
+  "encoding": { 
+    "x": { 
+      "field": "Year", 
+      "type": "ordinal", 
+      "axis": { 
+        "labelAngle": -45  // Rotate labels for clarity
+      } 
+    }
+  },
   "layer": [
     { 
-      "mark": "line",
+      "mark": "line",  // Line for number of euthanised dogs
       "encoding": { 
-        "y": { "field": "Euthanasia", "type": "quantitative", "title": "Number of Dogs Euthanised", "axis": { "titleColor": "#ff0000" } }, 
-        "color": { "value": "#ff0000" },
+        "y": { 
+          "field": "Euthanasia", 
+          "type": "quantitative", 
+          "title": "Number of Dogs Euthanised", 
+          "axis": { "titleColor": "#ff0000" } 
+        }, 
+        "color": { "value": "#ff0000" },  // Red line
         "tooltip": [
           { "field": "Year", "type": "ordinal", "title": "Year" },
-          { "field": "Euthanasia", "type": "quantitative", "title": "Number of Dogs Euthanised" },
-          { "field": "Percentage", "type": "quantitative", "title": "Percentage of Total Dogs", "format": ".1f" }
+          { "field": "Euthanasia", "type": "quantitative", "title": "Number of Dogs Euthanised" }
         ]
       } 
     },
     { 
-      "mark": "line",
+      "mark": "line",  // Line for euthanasia percentage
       "encoding": { 
-        "y": { "field": "Percentage", "type": "quantitative", "title": "Euthanasia Percentage (%)", "axis": { "orient": "right", "titleColor": "#ffbaba" } }, 
-        "color": { "value": "#ffbaba" },
+        "y": { 
+          "field": "Percentage", 
+          "type": "quantitative", 
+          "title": "Euthanasia Percentage (%)", 
+          "axis": { "orient": "right", "titleColor": "#ffbaba" } 
+        }, 
+        "color": { "value": "#ffbaba" },  // Light red line
         "tooltip": [
           { "field": "Year", "type": "ordinal", "title": "Year" },
           { "field": "Percentage", "type": "quantitative", "title": "Euthanasia Percentage (%)" }
         ]
       } 
     },
+    // Annotation Line (2013) with Tooltip
     {
-      "mark": { "type": "rule", "color": "black", "strokeDash": [6, 4], "tooltip": true },
+      "mark": { 
+        "type": "rule", 
+        "color": "black", 
+        "strokeDash": [6, 4], 
+        "tooltip": true  // Tooltip on the rule
+      },
       "encoding": {
         "x": { "datum": "2013", "type": "ordinal" },
         "tooltip": {
+          "content": "data",
           "value": "Sharp reduction due to regulations like the Dog Regulations 2013 and national initiatives."
         }
       }
     },
+    // Annotation Text (2013)
     {
-      "mark": { "type": "text", "align": "left", "dx": 5, "dy": -50, "fontSize": 10, "color": "black" },
+      "mark": { 
+        "type": "text", 
+        "align": "left", 
+        "dx": 5, 
+        "dy": -50, 
+        "fontSize": 10, 
+        "color": "black" 
+      },
       "encoding": {
         "x": { "datum": "2013", "type": "ordinal" },
         "text": { "value": "2013: Start of Decline" }
       }
     }
   ],
-  "resolve": { "scale": { "y": "independent" } },
-  "autosize": { "type": "fit", "contains": "padding" },
+  "resolve": { 
+    "scale": { 
+      "y": "independent"  // Separate y-axis for both lines
+    } 
+  },
+  "autosize": { 
+    "type": "fit", 
+    "contains": "padding" 
+  },
   "width": "container",
   "height": 400
 };
+
 vegaEmbed('#chart2', spec2, { actions: false });
 
-// Pie Chart 1: Adopted vs Purchased with black percentage text and increased padding for legend
+// Pie Chart 1: Adopted vs Purchased with tooltips
 const pieChart1Spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null, 
@@ -168,7 +211,11 @@ const pieChart1Spec = {
         "padding": 50,  // Increased padding between chart and legend
         "title": null 
       }
-    }
+    },
+    "tooltip": [
+      {"field": "Category", "type": "nominal", "title": "Category"},
+      {"field": "Percentage", "type": "quantitative", "format": ".1f", "title": "Percentage"}
+    ]
   },
   "layer": [
     {
@@ -204,7 +251,7 @@ const pieChart1Spec = {
 
 vegaEmbed('#pie-chart1', pieChart1Spec, { actions: false });
 
-// Pie Chart 2: Percentage of Puppies from Puppy Farms with adjusted labels
+// Pie Chart 2: Percentage of Puppies from Puppy Farms with tooltips
 const pieChart2Spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": null,
@@ -226,7 +273,11 @@ const pieChart2Spec = {
         "padding": 50,  // Increased padding between chart and legend
         "title": null
       }
-    }
+    },
+    "tooltip": [
+      {"field": "Category", "type": "nominal", "title": "Category"},
+      {"field": "Percentage", "type": "quantitative", "format": ".1f", "title": "Percentage"}
+    ]
   },
   "layer": [
     {
@@ -246,13 +297,13 @@ const pieChart2Spec = {
         "fill": "black"  // Set the text color to black
       },
       "encoding": {
-        // Replace "textik" with your Percentage field for display
         "text": {"field": "Percentage", "type": "quantitative", "format": ".1f"}
       }
     }
   ],
   "view": {"stroke": null}
 };
+
 vegaEmbed('#pie-chart2', pieChart2Spec, { actions: false });
 
 // Proportional Symbol Map for Victorian Shelters with hover-only tooltips and fix for data format
@@ -307,10 +358,10 @@ const spec3 = {
 };
 vegaEmbed('#chart3', spec3, { actions: false });
 
-// Word Cloud for Testimonials
+// Word Cloud for Testimonials with Tooltip
 const wordCloudSpec = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Word cloud based on provided words and their counts.",
+  "description": "Word cloud based on provided words and their counts with tooltips.",
   "width": 800,
   "height": 400,
   "padding": 0,
@@ -387,7 +438,10 @@ const wordCloudSpec = {
           "fill": {"scale": "color", "field": "text"}
         },
         "update": {
-          "fillOpacity": {"value": 1}
+          "fillOpacity": {"value": 1},
+          "tooltip": {
+            "signal": "{'Word': datum.text, 'Occurrences': datum.count}"
+          }
         },
         "hover": {
           "fillOpacity": {"value": 0.5}
