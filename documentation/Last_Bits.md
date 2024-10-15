@@ -4,4 +4,3 @@
 2. Add zoom element on the victorian map 
 ^^^^^ FUCKING KILL ME PLEASE ^^^^^
 
-3. Legend for diverging bar chart 
